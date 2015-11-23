@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Détails de l'annonce n°{{ annonce.id }}{% endblock %}
+
+{% block css %}<link href="{% static 'css/search/annonce.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 well">
+                <div class="panel panel-primary">
+                    <table class="table table-striped table-condensed">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Détails de l'annonce</h3>
+                        </div>
+                        <tbody>
+			    <tr>
+				<td><strong>Localisation de l'annonce</strong></td>
+				<td>{{ annonce.zone.nom }}</td>
+			    </tr>
+			    {% if annonce.ville != '' %}
+			    <tr>
+				<td><strong>Ville dans laquelle se déroule le contrat</strong></td>
+				<td>{{ annonce.ville }}</td>
+			    </tr>
+			    {% endif %}
+			    <tr>
+				<td><strong>Nom de l'organisme</strong></td>
+				<td>{{ annonce.nom_entreprise }}</td>
+			    </tr>
+			    {% if annonce.type_organisme != None %}
+			    <tr>
+				<td><strong>Type d'organisme annonceur</strong></td>
+				<td>{{ annonce.type_organisme.nom }}</td>
+			    </tr>
+			    {% endif %}
+			    <tr>
+				<td><strong>Nature du contrat</strong></td>
+				<td>{{ annonce.type_de_contrat.type_contrat }}</td>
+			    </tr>
+			    <tr>
+				<td><strong>Durée du contrat</strong></td>
+				<td>{{ annonce.duree.duree }}</td>
+			    </tr>
+			    {% if annonce.date_debut != '' %}
+			    <tr>
+				<td><strong>Date de début du contrat</strong></td>
+				<td>{{ annonce.date_debut }}</td>
+			    </tr>
+			    {% endif %}
+			    <tr>
+			    	<td><strong>Domaine{{ annonce.domain.count|pluralize }}</strong></td>
+				<td>
+				    {% for domaine in annonce.domain.all %}
+					{{ domaine }}<br>
+				    {% endfor %}
+				</td>
+			    </tr>
+			    {% if annonce.commentaires != '' %}
+			    <tr>
+				<td><strong>Commentaires à propose de l'annonce</strong></td>
+				<td>{{ annonce.commentaires }}</td>
+			    </tr>
+			    {% endif %}
+			</tbody>
+                    </table>
+                </div>
+
+                <!-- Description du poste !-->
+                <div class="col-lg-12">
+                        <h3>Description de l'annonce :</h3>
+			{% if annonce.url_annonce != '' %}
+			    <p>L'annonce est disponible à cette addresse : <a href="{{ annonce.url_annonce }}" target="_blank">{{ annonce.url_annonce }}</a></p>
+			{% endif %}
+			{% if annonce.fichier != '' %}
+			    {% if annonce.multiple_files == '1' %}
+				<div class="col-md-6 col-md-offset-3 alert alert-info text-center"><span class="glyphicon glyphicon-info-sign"></span> <strong>Ce fichier comporte plusieurs annonces</strong></div>
+			    {% endif %}
+				<iframe src="/media/{{ annonce.fichier }}" width="100%" height="500"></iframe>
+			{% endif %}	
+                </div>
+
+                <!-- Infos pour nous contacter !-->
+                <div class="col-lg-12">
+                    <h5><strong>Si cette annonce vous paraît suspecte, ou si vous avez contacté la personne et que l'annonce n'est plus disponible, merci de nous <a href="mailto:stages@resel.fr?subject=Informations concernant l'annonce {{ annonce.id }}">contacter</a>  en indiquant le numéro de l'annonce ({{ annonce.id }}).</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

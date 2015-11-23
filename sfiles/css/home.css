@@ -1,0 +1,36 @@
+body {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: none;
+}
+
+.full {
+	background: url(../img/background.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#logo {
+	height: 30px;
+	width: auto;
+	margin-top: -5px;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+a p {
+	color: black;
+}
+
+#infos h1 {
+	color: #fed136;
+	font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+}
+
+#infos h3 {
+	font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+}

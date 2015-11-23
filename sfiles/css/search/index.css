@@ -1,0 +1,17 @@
+select, input {
+	width: 100%;
+}
+
+label {
+	margin-top: 5px;
+}
+
+h2 {
+	font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+	font-weight: bold;
+}
+
+button {
+	margin-top: 10px;
+	margin-left: 40%;
+}
