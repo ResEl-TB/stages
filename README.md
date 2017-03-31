@@ -15,7 +15,7 @@ Plate-forme de stages pour Télécom Bretagne
   elle est supprimée.
   
 ## Accès
-  Le site est accessible à l'adresse http://stages.resel.fr
+  Le site est accessible à l'adresse https://stages.resel.fr
   
   Seules les personnes possédant un compte au sein de l'école sont autorisées à parcourir le site,
   ceci afin d'éviter que des offres de stages réservées aux étudiants de Télécom Bretagne ne soient
