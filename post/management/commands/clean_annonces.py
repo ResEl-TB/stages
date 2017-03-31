@@ -7,6 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 from django.utils.dateformat import DateFormat
 from django.core.mail import send_mail
+from django.core.files import File
 
 from post.models import Annonce
 
@@ -18,4 +19,10 @@ class Command(BaseCommand):
 
         for annonce in annonces:
             if annonce.pub_date < timezone.now() - timedelta(days=180):
-                annonce.delete()
+                try:
+                    annonce.delete()
+                except:
+                    open('/tmp/dummy', 'a').close()
+                    annonce.fichier = File(open('/tmp/dummy', 'r'))
+                    annonce.save()
+                    annonce.delete()
