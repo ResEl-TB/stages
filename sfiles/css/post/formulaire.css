@@ -1,0 +1,29 @@
+.well {
+	font-size: 0.9em !important;
+}
+
+textarea {
+	resize: none;
+	height: 2%;
+	width: 100%;
+}
+
+select, input {
+	width: 100%;
+}
+
+label {
+	margin-top: 5px;
+}
+
+.erreur {
+	color: red;
+}
+
+button {
+	margin-top: 10px;
+}
+
+#id_domain {
+	margin-bottom: 10px;
+}
