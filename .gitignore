@@ -1,0 +1,16 @@
+# Virtualenv files
+env
+
+# Deployment files
+uwsgi.*
+
+# Django files
+static
+media
+settings_local.py
+
+# Mac files
+.DS_Store
+
+# Python files
+*.pyc
