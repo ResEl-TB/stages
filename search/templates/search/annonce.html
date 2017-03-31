@@ -23,7 +23,7 @@
 			    {% if annonce.ville != '' %}
 			    <tr>
 				<td><strong>Ville dans laquelle se déroule le contrat</strong></td>
-				<td>{{ annonce.ville }}</td>
+				<td>{{ annonce.ville|title }}</td>
 			    </tr>
 			    {% endif %}
 			    <tr>
@@ -33,7 +33,7 @@
 			    {% if annonce.type_organisme != None %}
 			    <tr>
 				<td><strong>Type d'organisme annonceur</strong></td>
-				<td>{{ annonce.type_organisme.nom }}</td>
+				<td>{{ annonce.type_organisme.type_organisme }}</td>
 			    </tr>
 			    {% endif %}
 			    <tr>
@@ -60,8 +60,8 @@
 			    </tr>
 			    {% if annonce.commentaires != '' %}
 			    <tr>
-				<td><strong>Commentaires à propose de l'annonce</strong></td>
-				<td>{{ annonce.commentaires }}</td>
+				<td><strong>Commentaires à propos de l'annonce</strong></td>
+				<td>{{ annonce.commentaires|linebreaks }}</td>
 			    </tr>
 			    {% endif %}
 			</tbody>
@@ -78,13 +78,13 @@
 			    {% if annonce.multiple_files == '1' %}
 				<div class="col-md-6 col-md-offset-3 alert alert-info text-center"><span class="glyphicon glyphicon-info-sign"></span> <strong>Ce fichier comporte plusieurs annonces</strong></div>
 			    {% endif %}
-				<iframe src="/media/{{ annonce.fichier }}" width="100%" height="500"></iframe>
+				<iframe  type="application/pdf" src="/media/{{ annonce.fichier }}" width="100%" height="800"></iframe>
 			{% endif %}	
                 </div>
 
                 <!-- Infos pour nous contacter !-->
                 <div class="col-lg-12">
-                    <h5><strong>Si cette annonce vous paraît suspecte, ou si vous avez contacté la personne et que l'annonce n'est plus disponible, merci de nous <a href="mailto:stages@resel.fr?subject=Informations concernant l'annonce {{ annonce.id }}">contacter</a>  en indiquant le numéro de l'annonce ({{ annonce.id }}).</h5>
+                    <h5><strong>Si cette annonce vous paraît suspecte, ou si vous avez contacté la personne et que l'annonce n'est plus disponible, merci de nous <a href="mailto:stages-admin@resel.fr?subject=Informations concernant l'annonce {{ annonce.id }}">contacter</a>  en indiquant le numéro de l'annonce ({{ annonce.id }}).</h5>
                 </div>
             </div>
         </div>

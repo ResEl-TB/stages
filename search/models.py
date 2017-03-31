@@ -21,7 +21,6 @@ class RechercheFields(models.Model):
 		post.models.Domaine,
 		verbose_name = "Domaine concerné",
 		blank = True,
-		null = True,
 	)
 
     duree = models.ForeignKey(

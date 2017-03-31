@@ -35,7 +35,9 @@
                                                         {% endfor %}
                                                     </div>
                                                 {% endif %}
-                                                <div class="controls text-center">{{ field }}</div>
+                                                <div class="controls text-center">
+						    {{ field }}
+						</div>
 						{% if field.help_text != '' %}<span class="help-block">{{ field.help_text }}</span>{% endif %}
                                             </div>
                                         {% endfor %}

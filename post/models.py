@@ -104,6 +104,7 @@ class Annonce(models.Model):
 	type_de_contrat = models.ForeignKey(
 			TypeContrat,
 			verbose_name = "Type de contrat",
+			default = 1,
 			blank = False,
 		)
 
@@ -136,8 +137,15 @@ class Annonce(models.Model):
 
 	pub_date = models.DateTimeField(
 			verbose_name = 'Date de publication',
-			default = timezone.localtime(timezone.now()),
+			auto_now = False,
+			auto_now_add = True,
 			editable = False
+		)
+
+	visites = models.IntegerField(
+			verbose_name = 'Visites',
+			editable = False,
+			default = 0,
 		)
 
 	def __unicode__(self):

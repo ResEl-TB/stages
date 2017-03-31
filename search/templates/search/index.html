@@ -10,7 +10,7 @@
     <div class="container">
         <div class="col-sm-3 well">
             <h3 class="text-center">Sélectionnez vos critères de recherche</h3>
-            <form action="." method="post" class='form-horizontal'>
+            <form action="{% url 'home' %}" method="post" class='form-horizontal'>
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="control-group">
@@ -36,7 +36,7 @@
         </div>
         <div class="col-sm-8 col-sm-offset-1 well">
         {% if annonces %}
-            <legend>{{ annonces|length }} annonce{{ annonces|length|pluralize }} correspond{{ annonces|length|pluralize:'ent' }} &agrave; votre recherche</legend>
+            <legend>{{ nb_annonces }} annonce{{ nb_annonces|pluralize }} correspond{{ nb_annonces|pluralize:'ent' }} &agrave; votre recherche</legend>
             {% for annonce in annonces %}
                 <a href="{% url 'search:detail' annonce.id %}">
                     <div class="panel panel-info">
@@ -52,7 +52,10 @@
 			    <div class="col-md-6">
 				<ul>
 				    <li>Publiée le {{ annonce.pub_date|date:'DATE_FORMAT' }}</li>
-				    <li>Contrat d'une durée de {{ annonce.duree }}</li>
+				    <li>Contrat d'une durée de {{ annonce.duree|lower }}</li>
+				    {% if annonce.multiple_files == '1' %}
+				    <li>Groupement de plusieurs annonces</li>
+				    {% endif %}
 				</ul>	
 			    </div>
 			</div>
@@ -60,16 +63,29 @@
                 </a>
             {% endfor %}
 
-            {% if is_paginated %}
-                <ul class="pager">
-                    {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}">Précédente</a></li>
-                    {% endif %}
-                    {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}">Suivante</a></li>
-                    {% endif %}
-                </ul>
-            {% endif %}
+	    {% if is_paginated %}
+	    <div class="text-center">
+	    <ul class="pagination">
+		{% if page_obj.has_previous %}
+		<li>
+      		    <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        	    <span aria-hidden="true">&laquo;</span>
+      		    </a>
+    		</li>
+		{% endif %}
+	        {% for number in range_pages %}
+		<li{% if number  == page_obj.number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+	        {% endfor %}
+		{% if page_obj.has_next %}
+		<li>
+                    <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+	    </ul>
+	    </div>
+	    {% endif %}
 
         {% else %}
             <span class="glyphicon glyphicon-warning-sign"></span>  <strong>Aucune annonce ne correspond &agrave; votre recherche</strong>

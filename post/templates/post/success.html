@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 well">
                 <h1 class="alert alert-success">Annonce en ligne !</h1>
-                <p>Votre annonce a été mise en ligne et est maintenant disponible. Vous pouvez y accéder <a id="lien_annonce" href="{% url 'search:detail' annonce.id %}">ici</a>.</p>
+                <p>Votre annonce a été mise en ligne et est maintenant disponible. Vous pouvez y accéder <a id="lien_annonce" href="{% url 'search:detail' request.session.annonce.id %}">ici</a>.</p>
                 <p>Pour toute information ou modification de celle-ci, vous pouvez contacter les modérateurs via le formulaire de contact situé en haut de cette page.</p>
             </div>
         </div>

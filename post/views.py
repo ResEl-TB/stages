@@ -5,6 +5,7 @@ from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
+from django.core.urlresolvers import reverse
 
 from post.forms import AnnonceForm
 from post.models import Annonce
@@ -21,17 +22,13 @@ class AnnonceCreate(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(AnnonceCreate, self).dispatch(*args, **kwargs)
 
+    def get_success_url(self):
+	self.request.session['annonce'] = self.object
+	return reverse('post:success')
+
 class SuccessView(TemplateView):
     """ Vue affichée une fois la mise en ligne auto effectuée """
     template_name = 'post/success.html'
-
-    def get_context_data(self, **kwargs):
-        # Récupération du contexte existant
-        context = super(SuccessView, self).get_context_data(**kwargs)
-
-        # Ajout du contexte nécessaire à post/success.html
-        context['annonce'] = Annonce.objects.order_by('-pub_date')[0]
-        return context
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
