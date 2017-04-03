@@ -8,6 +8,7 @@ uwsgi.*
 static
 media
 settings_local.py
+db.sqlite3
 
 # Mac files
 .DS_Store
