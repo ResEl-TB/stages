@@ -1,23 +1,23 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from django import forms
-from django.utils import timezone
 
-from .models import RechercheFields
-from post.models import Domaine
+from post.models import Domaine, Zone, Duree, TypeContrat, Annonce
 
-class RechercheForm(forms.ModelForm):
-    """ Formulaire pour rechercher parmi les annonces existantes """
+class SearchForm(forms.Form):
+    zone = forms.ModelChoiceField(queryset=Zone.objects.all(), empty_label=None, required=False)
+    nom_entreprise = forms.CharField(max_length=40, required=False)
+    domain = forms.ModelMultipleChoiceField(queryset=Domaine.objects.all(), required=False)
+    duree = forms.ModelChoiceField(queryset=Duree.objects.all(), empty_label=None, required=False)
+    type_de_contrat = forms.ModelChoiceField(queryset=TypeContrat.objects.all(), empty_label=None, required=False)
 
-    class Meta:
-	model = RechercheFields
-	fields = [
-		'zone', 'nom_entreprise', 'domain', 'duree', 'type_de_contrat',
-	]
-	widgets = {
-                'domain': forms.SelectMultiple(attrs={'size': str(Domaine.objects.count())}),
-        }
-  
-    def clean_nom_entreprise(self):
-    	return self.cleaned_data['nom_entreprise'].encode('utf8')
+    def build_queryset(self):
+        data = self.cleaned_data
+        d = {}
+        for key, value in data.items():
+            if value:
+                if key == 'nom_entreprise':
+                    d[key+'__contains'] = value
+                elif key == 'domain':
+                    d[key+'__pk__in'] = [_.pk for _ in value]
+                else:
+                    d[key+'__pk'] = value.pk
+        return Annonce.objects.filter(**d) if len(d) != 0 else Annonce.objects.all()
