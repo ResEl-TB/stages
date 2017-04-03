@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-import ldap
-
-from stages.settings_local import *
-
 """
 Django settings for stages project.
 
@@ -17,48 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Config relative au SSL pour le HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from stages.settings_local import *
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Config pour Django-auth-ldap
-AUTH_LDAP_ADMIN_SERVER_URI = "ldap://ldap.resel.fr:389"
-AUTH_LDAP_ADMIN_BIND_DN = ""
-AUTH_LDAP_ADMIN_BIND_PASSWORD = ""
-AUTH_LDAP_ADMIN_USER_DN_TEMPLATE = "uid=%(user)s,ou=admins,dc=resel,dc=enst-bretagne,dc=fr"
-AUTH_LDAP_ADMIN_START_TLS = True
-
-AUTH_LDAP_USERS_SERVER_URI = "ldap://ldap.resel.fr:389"
-AUTH_LDAP_USERS_BIND_DN = ""
-AUTH_LDAP_USERS_BIND_PASSWORD = ""
-AUTH_LDAP_USERS_USER_DN_TEMPLATE = "uid=%(user)s,ou=people,dc=maisel,dc=enst-bretagne,dc=fr"
-AUTH_LDAP_USERS_START_TLS = True
 
 # Config pour Django-cas-ng
 CAS_SERVER_URL = "https://login.telecom-bretagne.eu/cas/"
-CAS_REDIRECT_URL = "/"
+CAS_CREATE_USER = False
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'stages.auth_ldap.LDAPBackendAdmin',
-    'stages.auth_ldap.LDAPBackendUsers',
     'django_cas_ng.backends.CASBackend',
 )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 # Config pour l'envoi de mails
 SERVER_EMAIL = 'stages-bot@resel.fr'
@@ -70,7 +39,7 @@ ADMINS = [
     ('ML de stages', 'stages-admin@resel.fr'),
 ]
 
-ALLOWED_HOSTS = ['stages.resel.fr']
+ALLOWED_HOSTS = ['stages.resel.fr', 'localhost']
 
 # Pour le login et logout
 LOGIN_URL = '/login'
@@ -91,11 +60,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stages',
+    'django_cas_ng',
+    'pages',
     'post',
     'search',
-    'django_cleanup',
-    'django_cas_ng',
 )
 
 MIDDLEWARE_CLASSES = (
