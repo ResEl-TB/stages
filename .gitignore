@@ -14,3 +14,4 @@ settings_local.py
 
 # Python files
 *.pyc
+__pycache__
