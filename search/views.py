@@ -17,7 +17,7 @@ class IndexView(ListView, FormView):
     def get_form(self, form_class=None):
         if form_class is None:
             form_class = self.get_form_class()
-
+        
         form = form_class(data={
             'zone': self.request.GET.get('zone', ''),
             'duree': self.request.GET.get('duree', ''),

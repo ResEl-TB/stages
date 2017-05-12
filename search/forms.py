@@ -48,4 +48,5 @@ class SearchForm(forms.Form):
                         d[key+'__pk'] = value.pk
                 else:
                     d[key+'__pk'] = value.pk
-        return Annonce.objects.filter(**d) if len(d) != 0 else Annonce.objects.all()
+        results = Annonce.objects.filter(**d) if len(d) != 0 else Annonce.objects.all()
+        return results.order_by('-pub_date')
