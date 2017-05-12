@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django_cas_ng import views as cas_views
 
-from pages.views import ContactView
 from search.views import IndexView
 
 urlpatterns = [
@@ -13,7 +12,6 @@ urlpatterns = [
 	url(r'^login$', cas_views.login, {'next_page': '/'}, name="login"),
     url(r'^logout$', cas_views.logout, name="logout"),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^contact', ContactView.as_view() , name="contact"),
 	url(r'^post/', include('post.urls', namespace="post")),
 	url(r'^search/', include('search.urls', namespace="search")),
 ]
