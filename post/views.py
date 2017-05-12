@@ -20,3 +20,8 @@ class AnnonceCreate(CreateView):
         response = super(AnnonceCreate, self).form_valid(form)
         messages.success(self.request, "L'annonce a bien été créée.")
         return response
+
+    def form_invalid(self, form):
+        response = super(AnnonceCreate, self).form_invalid(form)
+        messages.error(self.request, form.errors)
+        return response
