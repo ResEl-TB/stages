@@ -1,0 +1,60 @@
+{% extends 'skeleton.html' %}
+{% load addcss %}
+
+{% block content %}
+<div class="container">
+    <div class="visible-sm visible-xs text-center">
+        <button class="btn btn-default" data-toggle="collapse" data-target="#search">Rechercher</button>
+    </div>
+
+    <div class="hidden-sm hidden-xs col-md-3 element search" id="search">
+        <form action="{% url 'home' %}" method="get">
+            <legend>Filtrer la recherche</legend>
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.label_for }}">{{ field.label|capfirst }}</label>
+                {{ field|addcss:"form-control" }}
+            </div>
+            {% endfor %}
+            
+            <div class="text-center">
+                <div class="btn-group" role="group" aria-label="Triggers">
+                    <a href="{% url 'home' %}" class="btn btn-default">Reset</a>
+                    <input type="submit" class="btn btn-default" value="Filtrer">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-8 col-md-offset-1 results">
+        <div class="row">
+            <legend class="lead">{{ object_list.count }} annonce{{ object_list.count|pluralize }}
+            correspond{{ object_list.count|pluralize:'ent' }} à votre recherche</legend>
+        </div>
+        {% for annonce in object_list %}
+        <div class="row element">
+            <legend>
+                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|capfirst }} - Durée de {{ annonce.duree.duree|lower }}
+            </legend>
+            <div class="col-xs-6">
+                <p>
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    {% if annonce.ville %}
+                        {{ annonce.ville|capfirst }}
+                    {% else %}
+                        {{ annonce.zone.nom|capfirst }}
+                    {% endif %}
+                </p>
+                <p><i class="fa fa-calendar-o" aria-hidden="true"></i> Publiée le {{ annonce.pub_date|date:'DATE_FORMAT' }}</p>
+            </div>
+
+            <div class="col-xs-6">
+                {% for d in annonce.domain.all %}
+                <p>{{ d.nom }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
