@@ -11,7 +11,7 @@ from .forms import SearchForm
 class IndexView(ListView, FormView):
     model = Annonce
     template_name = 'search/index.html'
-    paginate_by = 20
+    paginate_by = 5
     form_class = SearchForm
 
     def get_form(self, form_class=None):
@@ -30,6 +30,11 @@ class IndexView(ListView, FormView):
     def get_queryset(self):
         form = self.get_form()
         return form.build_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['count'] = self.get_queryset().count()
+        return context
     
 @method_decorator(login_required, name='dispatch')
 class DetailView(DetailView):

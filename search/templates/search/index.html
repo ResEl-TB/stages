@@ -28,13 +28,35 @@
 
     <div class="col-md-8 col-md-offset-1 results">
         <div class="row">
-            <legend class="lead">{{ object_list.count }} annonce{{ object_list.count|pluralize }}
-            correspond{{ object_list.count|pluralize:'ent' }} à votre recherche</legend>
+            <legend class="lead">
+                {{ count }} annonce{{ count|pluralize }} correspond{{ count|pluralize:'ent' }} à votre recherche
+            </legend>
+
+            {% if is_paginated %}
+            <nav aria-label="Page navigation">
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                    <li class="previous">
+                        <a href="?page={{ page_obj.previous_page_number }}">
+                            <span aria-hidden="true">&larr;</span> Précédent</a>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li class="next">
+                        <a href="?page={{ page_obj.next_page_number }}">
+                            Suivant <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
         {% for annonce in object_list %}
         <div class="row element clickable" data-url="{% url 'search:detail' annonce.pk %}">
             <legend>
-                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|capfirst }} - Durée de {{ annonce.duree.duree|lower }}
+                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|lower|capfirst }} - Durée de {{ annonce.duree.duree|lower }}
             </legend>
             <div class="col-xs-6">
                 <p>
@@ -42,6 +64,9 @@
                     {% if annonce.ville %} - {{ annonce.ville|capfirst }}{% endif %}
                 </p>
                 <p><i class="fa fa-calendar-o" aria-hidden="true"></i> Publiée le {{ annonce.pub_date|date:'DATE_FORMAT' }}</p>
+                {% if annonce.multiple_files %}
+                <p><i class="fa fa-files-o" aria-hidden="true"></i> Plusieurs annonces</p>
+                {% endif %}
             </div>
 
             <div class="col-xs-6">
