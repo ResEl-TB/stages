@@ -26,55 +26,57 @@
             {% endif %}
 
             <div class="col-md-6 col-sm-12 col-xs-12 {% if not annonce.ville %}col-md-offset-3{% endif %}">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><b>Organisme</b></td>
-                            <td>{{ annonce.nom_entreprise|lower|capfirst }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Localisation</b></td>
-                            <td>{{ annonce.zone.nom }}{% if annonce.ville %} - {{ annonce.ville|capfirst }}{% endif %}</td>
-                        </tr>
-                        {% if annonce.type_organisme %}
-                        <tr>
-                            <td><b>Type d'organisme</b></td>
-                            <td>{{ annonce.type_organisme.type_organisme }}</td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <td><b>Nature du contrat</b></td>
-                            <td>{{ annonce.type_de_contrat.type_contrat }} durant {{ annonce.duree.duree }}</td>
-                        </tr>
-                        {% if annonce.date_debut %}
-                        <tr>
-                            <td><b>Début du contrat</b></td>
-                            <td>{{ annonce.date_debut|date:"d F Y" }}</td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <td><b>Domaines concernés</b></td>
-                            <td>{% for d in annonce.domain.all %}<p>{{ d.nom }}</p>{% endfor %}</td>
-                        </tr>
-                        {% if annonce.url %}
-                        <tr>
-                            <td><b>URL de l'annonce</b></td>
-                            <td><a href="{{ annonce.url }}">{{ annonce.url }}</a></td>
-                        </tr>
-                        {% elif annonce.file and mobile %}
-                        <tr>
-                            <td><b>Télécharger l'annonce</b></td>
-                            <td><a href="{{ annonce.file.url }}">Cliquez ici</a></td>
-                        </tr>
-                        {% endif %}
-                        {% if annonce.commentaires %}
-                        <tr>
-                            <td><b>Commentaires</b></td>
-                            <td>{{ annonce.commentaires }}</td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><b>Organisme</b></td>
+                                <td>{{ annonce.nom_entreprise|lower|capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Localisation</b></td>
+                                <td>{{ annonce.zone.nom }}{% if annonce.ville %} - {{ annonce.ville|capfirst }}{% endif %}</td>
+                            </tr>
+                            {% if annonce.type_organisme %}
+                            <tr>
+                                <td><b>Type d'organisme</b></td>
+                                <td>{{ annonce.type_organisme.type_organisme }}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td><b>Nature du contrat</b></td>
+                                <td>{{ annonce.type_de_contrat.type_contrat }} durant {{ annonce.duree.duree }}</td>
+                            </tr>
+                            {% if annonce.date_debut %}
+                            <tr>
+                                <td><b>Début du contrat</b></td>
+                                <td>{{ annonce.date_debut|date:"d F Y" }}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td><b>Domaines concernés</b></td>
+                                <td>{% for d in annonce.domain.all %}<p>{{ d.nom }}</p>{% endfor %}</td>
+                            </tr>
+                            {% if annonce.url %}
+                            <tr>
+                                <td><b>URL de l'annonce</b></td>
+                                <td><a href="{{ annonce.url }}">{{ annonce.url }}</a></td>
+                            </tr>
+                            {% elif annonce.file and mobile %}
+                            <tr>
+                                <td><b>Télécharger l'annonce</b></td>
+                                <td><a href="{{ annonce.file.url }}">Cliquez ici</a></td>
+                            </tr>
+                            {% endif %}
+                            {% if annonce.commentaires %}
+                            <tr>
+                                <td><b>Commentaires</b></td>
+                                <td>{{ annonce.commentaires }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
