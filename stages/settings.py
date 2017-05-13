@@ -39,7 +39,7 @@ ADMINS = [
     ('ML de stages', 'stages-admin@resel.fr'),
 ]
 
-ALLOWED_HOSTS = ['stages.resel.fr', 'localhost']
+ALLOWED_HOSTS = ['stages.resel.fr']
 
 # Pour le login et logout
 LOGIN_URL = '/login'
@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'easy_maps',
     'django_cas_ng',
     'pages',
     'post',
@@ -90,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.mobile',
             ],
         },
     },

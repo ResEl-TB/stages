@@ -61,6 +61,11 @@
                             <td><b>URL de l'annonce</b></td>
                             <td><a href="{{ annonce.url }}">{{ annonce.url }}</a></td>
                         </tr>
+                        {% elif annonce.file and mobile %}
+                        <tr>
+                            <td><b>Télécharger l'annonce</b></td>
+                            <td><a href="{{ annonce.file.url }}">Cliquez ici</a></td>
+                        </tr>
                         {% endif %}
                         {% if annonce.commentaires %}
                         <tr>
@@ -73,7 +78,7 @@
             </div>
         </div>
 
-        {% if annonce.file %}
+        {% if annonce.file and not mobile %}
         <div class="row">
             <iframe  type="application/pdf" src="{{ annonce.file.url }}" width="100%" height="800"></iframe> 
         </div>
