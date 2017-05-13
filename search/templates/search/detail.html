@@ -71,7 +71,7 @@
                             {% if annonce.commentaires %}
                             <tr>
                                 <td><b>Commentaires</b></td>
-                                <td>{{ annonce.commentaires }}</td>
+                                <td>{{ annonce.commentaires|linebreaks }}</td>
                             </tr>
                             {% endif %}
                         </tbody>
