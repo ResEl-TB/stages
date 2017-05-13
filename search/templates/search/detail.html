@@ -21,7 +21,7 @@
 
             {% if annonce.ville %}
             <div class="col-md-6 col-sm-12 col-xs-12">
-                {% easy_map annonce.nom_entreprise|add:annonce.ville 200 300 6 %}
+                {% easy_map annonce.nom_entreprise|add:' '|add:annonce.ville 200 300 7 %}
             </div>
             {% endif %}
 
