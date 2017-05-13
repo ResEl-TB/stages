@@ -1,79 +1,45 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-from django.shortcuts import render
-from django.core.urlresolvers import reverse
-from django.views.generic import ListView, DetailView, UpdateView
-from django.http import HttpResponseRedirect
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.db.models import Q
 
 from post.models import Annonce
-from search.forms import RechercheForm
+from .forms import SearchForm
 
-class IndexView(ListView):
+@method_decorator(login_required, name='dispatch')
+class IndexView(ListView, FormView):
     model = Annonce
-    form_class = RechercheForm
     template_name = 'search/index.html'
-    context_object_name = 'annonces'
-    form = form_class()
-    nb_annonces = Annonce.objects.all().count()
-    paginate_by = 20
-    queryset = Annonce.objects.all().order_by('-pub_date')
+    paginate_by = 10
+    form_class = SearchForm
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(IndexView, self).dispatch(*args, **kwargs)
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        
+        form = form_class(data={
+            'zone': self.request.GET.get('zone', ''),
+            'duree': self.request.GET.get('duree', ''),
+            'domain': self.request.GET.getlist('domain', ''),
+            'type_de_contrat': self.request.GET.get('type_de_contrat', ''),
+            'nom_entreprise': self.request.GET.get('nom_entreprise', ''),
+        })
+        return form
+
+    def get_queryset(self):
+        form = self.get_form()
+        return form.build_queryset()
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context.update(**kwargs)
-        context['form'] = self.form
-	context['nb_annonces'] = self.nb_annonces
-        context['range_pages'] = range(1, int(self.nb_annonces / self.paginate_by) + 2)
-	return context
-
-    def get(self, request, *args, **kwargs):
-        self.form = self.form_class(self.request.GET)
-	page = request.GET.get('page', '')
-	if page == '' and 'champs' in request.session:
-            del request.session['champs']
-	#if 'champs' in request.session:
-	#    if self.nb_annonces != Annonce.objects.all().count():
-	#    	del request.session['champs']
-	return super(IndexView, self).get(request, *args, **kwargs)
-
-    def get_queryset(self):
-	annonces = Annonce.objects.all().order_by('-pub_date')
-	if 'champs' in self.request.session:
-	    champs = self.request.session['champs']
-	    for key, value in champs.items():
-	        if value != None:
-		    if key == 'zone':
-		        annonces = annonces.filter(zone__id = value.id)
-		    elif key == 'nom_entreprise':
-			if value != '':
-			    annonces = annonces.filter(nom_entreprise__icontains = value)
-		    elif key == 'duree':
-			annonces = annonces.filter(duree__id = value.id)
-		    elif key == 'type_de_contrat':
-			annonces = annonces.filter(type_de_contrat__id = value.id)
-		    elif key == 'domain':
-			for domaine in value:
-			    annonces = annonces.filter(domain__id = domaine.id)
-	self.nb_annonces = annonces.count()
-	return annonces
-
-    def post(self, request, *args, **kwargs):
-        self.form = self.form_class(self.request.POST)
-        if self.form.is_valid():
-	    request.session['champs'] = self.form.cleaned_data
-        return super(IndexView, self).get(request, *args, **kwargs)
-
+        context['count'] = self.get_queryset().count()
+        return context
+    
+@method_decorator(login_required, name='dispatch')
 class DetailView(DetailView):
     model = Annonce
-    template_name = 'search/annonce.html'
+    template_name = 'search/detail.html'
 
     def get_object(self):
         # Call the superclass
@@ -83,8 +49,4 @@ class DetailView(DetailView):
         object.save()
         # Return the object
         return object
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(DetailView, self).dispatch(*args, **kwargs)
 

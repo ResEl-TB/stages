@@ -1,0 +1,114 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stages | {% block title %}Accueil{% endblock %}</title>
+
+    {# Latest minified Bootstrap CSS #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    {# Font Awesome #}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    {# Custom css #}
+    <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    {# Navbar #}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                {# Brand and toggle get grouped for better mobile display #}
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                        data-target="#navbar-links" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">stages.resel.fr</a>
+            </div>
+
+            {# Collect the nav links, forms, and other content for toggling #}
+            <div class="collapse navbar-collapse" id="navbar-links">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}"><i class="fa fa-wrench" aria-hidden="true"></i> Administration</a></li>
+                    <li><a href="{% url 'post:creation' %}"><i class="fa fa-upload" aria-hidden="true"></i> Poster une annonce</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'home' %}"><i class="fa fa-search" aria-hidden="true"></i> Parcourir les annonces</a></li>
+                    <li><a href="mailto:stages-admin@resel.fr?subject=[Contact] Demande d'informations"><i class="fa fa-info" aria-hidden="true"></i> Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {# Messages #}
+    {% if messages %}
+    <div class="container">
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Erreur !</strong> {{ message }}
+                </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Bien joué !</strong> {{ message }}
+                </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Lisez ceci !</strong> {{ message }}
+                </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Attention !</strong> {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    {# Footer #}
+    <footer>
+        <div class="footer-above"></div>
+        <div class="footer-below text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="small">Stages ResEl 2015 - Tous droits réservés</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {# jQuery #}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="
+    sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    {# Latest compiled and minified JavaScript #}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    {# Custom javascript #}
+    {% block js %}{% endblock %}
+</body>
+</html>

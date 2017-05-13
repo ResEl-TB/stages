@@ -1,0 +1,107 @@
+{% extends 'skeleton.html' %}
+{% load staticfiles %}
+{% load addcss %}
+
+{% block title %}Ajout d'annonce{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container element">
+    <div class="row">
+        <form action="{% url 'post:creation' %}" method="post" enctype="multipart/form-data" id="addAnnounce">
+            {% csrf_token %}
+            <fieldset class="col-md-4">
+                <legend class="text-center">Information nécessaires</legend>
+                <div class="form-group">
+                    <label for="{{ form.zone.label_for }}">{{ form.zone.label|capfirst }}</label>
+                    {{ form.zone|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.nom_entreprise.label_for }}">{{ form.nom_entreprise.label|capfirst }}</label>
+                    {{ form.nom_entreprise|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.type_de_contrat.label_for }}">{{ form.type_de_contrat.label|capfirst }}</label>
+                    {{ form.type_de_contrat|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.duree.label_for }}">{{ form.duree.label|capfirst }}</label>
+                    {{ form.duree|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.domain.label_for }}">{{ form.domain.label|capfirst }}</label>
+                    {{ form.domain|addcss:"form-control" }}
+                    <p class="help-block">{{ form.domain.help_text }}</p>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-md-4">
+                <legend class="text-center">Accès à l'annonce</legend>
+                <div class="form-group">
+                    <label for="{{ form.url.label_for }}">{{ form.url.label|capfirst }}</label>
+                    {{ form.url|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.file.label_for }}">{{ form.file.label|capfirst }}</label>
+                    {{ form.file }}
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="multiple_files"> Le fichier contient plusieurs annonces</label>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-md-4">
+                <legend class="text-center">Informations facultatives</legend>
+                <div class="form-group">
+                    <label for="{{ form.ville.label_for }}">{{ form.ville.label|capfirst }}</label>
+                    {{ form.ville|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.date_debut.label_for }}">{{ form.date_debut.label|capfirst }}</label>
+                    {{ form.date_debut|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.type_organisme.label_for }}">{{ form.type_organisme.label|capfirst }}</label>
+                    {{ form.type_organisme|addcss:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.commentaires.label_for }}">{{ form.commentaires.label|capfirst }}</label>
+                    {{ form.commentaires|addcss:"form-control" }}
+                </div>
+            </fieldset>
+
+            <div class="col-md-12 text-center">
+                <button class="btn btn-default btn-lg" type="submit">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i> Envoyer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+<script type="text/javascript">
+  $(function(){
+    $('#id_date_debut').datepicker({
+      minDate: 0,
+      altField: "#datepicker",
+      closeText: 'Fermer',
+      prevText: 'Précédent',
+      nextText: 'Suivant',
+      currentText: 'Aujourd\'hui',
+      monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+      dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+      dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+      weekHeader: 'Sem.',
+      dateFormat: 'yy-mm-dd'
+    });
+  });
+</script>
+{% endblock %}

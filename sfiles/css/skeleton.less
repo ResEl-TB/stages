@@ -1,0 +1,152 @@
+/* Constants */
+@bg-color: #FAFAFA;
+@element-color: white;
+@link-color: #fc6e73;
+@link-hover-color: #e74c3c;
+
+/* Global styles */
+body {
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.element { 
+    background-color: @element-color;
+    border-radius: 3px;
+    box-shadow: 0 4px 10px -2px gray;
+    padding: 30px;
+
+
+    ul {
+        list-style: none;
+    }
+
+    legend {
+        border-bottom: 1px solid @link-color;
+    }
+}
+
+footer {
+    bottom: 0;
+    color: @bg-color;
+
+    .footer-above {
+        padding-top: 50px;
+    }
+
+    .footer-below {
+        padding: 25px;
+    }
+}
+
+/* Search styles */
+.visible-xs button {
+    margin-bottom: 10px;
+}
+
+.search {
+    font-size: 1em;
+
+    &.in,
+    &.collapsing {
+        display: block !important;
+    }
+}
+
+.lead {
+    color: @bg-color;
+
+    @media (max-width: 768px) {
+        margin-top: 20px;
+    }
+}
+
+.results .element {
+    margin-bottom: 20px;
+
+    legend b {
+        color: @link-color;
+    }
+
+    &:hover {
+        cursor: pointer;
+        cursor: hand;
+    }
+}
+
+/* Google Maps styles */
+.easy-map-googlemap {
+    width: 100% !important;
+}
+
+/* Post styles */
+textarea {
+    resize: none;
+}
+
+#addAnnounce {
+    legend {
+        text-transform: uppercase;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: @link-color;
+    }
+}
+
+/* Override Bootstrap styles */
+.navbar-default {
+    background-color: @bg-color;
+    border: none;
+    border-radius: 0px;
+}
+
+.navbar-nav {
+    li > a {
+        color: @link-color !important;
+        font-weight: bold;
+        font-size: 1em;
+
+        &:hover {
+            color: @link-hover-color !important;
+        }
+    }
+}
+
+.btn-default {
+    background-color: @link-color;
+    border-color: white;
+    color: white;
+    outline: none !important;
+
+    &:hover,
+    &:focus,
+    &.focus {
+        background-color: @link-hover-color;
+        border-color: white;
+        color: white;
+    }
+
+    &:active,
+    &.active,
+    &.disabled,
+    &:disabled {
+        background-color: @link-hover-color;
+        border-color: white !important;
+
+        &:focus,
+        &.focus {
+            background-color: @link-hover-color;
+            border-color: white;
+            color: white;
+        }
+    }
+}
+
+.form-control {
+    &:focus {
+        border-color: @link-color;
+        box-shadow: none;
+    }
+}
