@@ -76,11 +76,10 @@ class Annonce(models.Model):
         blank=True,
     )
 
-    date_debut = models.CharField(
+    date_debut = models.DateField(
         verbose_name='Date de début du contrat',
-        max_length=10,
-        default='',
         blank=True,
+        null=True,
     )  
 
     duree = models.ForeignKey(
@@ -116,7 +115,7 @@ class Annonce(models.Model):
         blank=False,
     )
 
-    fichier = models.FileField(
+    file = models.FileField(
         verbose_name='Fichier contenant l\'annonce',
         blank=True,
         default='',
@@ -130,7 +129,7 @@ class Annonce(models.Model):
         default=False,
     )
 
-    url_annonce = models.URLField(
+    url = models.URLField(
         verbose_name='URL vers l\'annonce',
         default='',
         blank=True,

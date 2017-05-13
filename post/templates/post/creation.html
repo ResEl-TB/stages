@@ -41,12 +41,12 @@
             <fieldset class="col-md-4">
                 <legend class="text-center">Accès à l'annonce</legend>
                 <div class="form-group">
-                    <label for="{{ form.url_annonce.label_for }}">{{ form.url_annonce.label|capfirst }}</label>
-                    {{ form.url_annonce|addcss:"form-control" }}
+                    <label for="{{ form.url.label_for }}">{{ form.url.label|capfirst }}</label>
+                    {{ form.url|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.fichier.label_for }}">{{ form.fichier.label|capfirst }}</label>
-                    {{ form.fichier }}
+                    <label for="{{ form.file.label_for }}">{{ form.file.label|capfirst }}</label>
+                    {{ form.file }}
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" name="multiple_files"> Le fichier contient plusieurs annonces</label>

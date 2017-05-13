@@ -9,7 +9,7 @@ class AnnonceAdmin(admin.ModelAdmin):
             'fields': ['zone', 'nom_entreprise', 'type_de_contrat', 'duree', 'domain']
         }),
 	   ("Accès à l'annonce - Renseignez au moins un champ", {
-            'fields': ['url_annonce', 'fichier', 'multiple_files']
+            'fields': ['url', 'file', 'multiple_files']
         }),
 	   ('Informations optionnelles', {
             'fields': ['ville', 'date_debut', 'type_organisme', 'commentaires']
