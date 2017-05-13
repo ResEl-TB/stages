@@ -11,7 +11,7 @@ from .forms import SearchForm
 class IndexView(ListView, FormView):
     model = Annonce
     template_name = 'search/index.html'
-    paginate_by = 10
+    paginate_by = 15
     form_class = SearchForm
 
     def get_form(self, form_class=None):
