@@ -20,12 +20,12 @@
             </div>
 
             {% if annonce.ville %}
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 {% easy_map annonce.ville 200 300 5 %}
             </div>
             {% endif %}
 
-            <div class="col-md-6 {% if not annonce.ville %}col-md-offset-3{% endif %}">
+            <div class="col-md-6 col-sm-12 col-xs-12 {% if not annonce.ville %}col-md-offset-3{% endif %}">
                 <table class="table">
                     <tbody>
                         <tr>
