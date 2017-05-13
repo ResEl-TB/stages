@@ -1,6 +1,10 @@
 appdirs==1.4.3
 Django==1.11.1
+django-appconf==1.0.2
 django-cas-ng==3.5.6
+django-classy-tags==0.8.0
+django-easy-maps==0.9.3
+geopy==1.11.0
 ldap3==2.2.0
 packaging==16.8
 pyasn1==0.2.3
