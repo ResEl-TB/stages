@@ -76,6 +76,10 @@ footer {
     }
 }
 
+iframe {
+    margin-top: 20px;
+}
+
 /* Google Maps styles */
 .easy-map-googlemap {
     width: 100% !important;
@@ -141,6 +145,21 @@ textarea {
             border-color: white;
             color: white;
         }
+    }
+}
+
+.pager li>a {
+    background-color: @link-color;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &.focus {
+        background-color: @link-hover-color;
+        border-color: white;
+        color: white;
     }
 }
 
