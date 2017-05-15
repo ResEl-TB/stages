@@ -14,4 +14,4 @@ def url_replace(context, page):
         'nom_entreprise': request.GET.get('nom_entreprise', ''),
         'page': page,
     }
-    return urlencode(search)
+    return urlencode(search, True)
