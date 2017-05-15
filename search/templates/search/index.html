@@ -54,6 +54,7 @@
             </nav>
             {% endif %}
         </div>
+
         {% for annonce in object_list %}
         <div class="row element clickable" data-url="{% url 'search:detail' annonce.pk %}">
             <legend>
@@ -77,6 +78,29 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="row">
+            {% if is_paginated %}
+            <nav aria-label="Page navigation">
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                    <li class="previous">
+                        <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                            <span aria-hidden="true">&larr;</span> Précédent</a>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li class="next">
+                        <a href="?{% url_replace page=page_obj.next_page_number %}">
+                            Suivant <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
