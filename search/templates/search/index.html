@@ -58,12 +58,12 @@
         {% for annonce in object_list %}
         <div class="row element clickable" data-url="{% url 'search:detail' annonce.pk %}">
             <legend>
-                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise }} - Durée de {{ annonce.duree.duree|lower }}
+                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|lower|capitalize }} - Durée de {{ annonce.duree.duree|lower }}
             </legend>
             <div class="col-xs-6">
                 <p>
-                    <i class="fa fa-globe" aria-hidden="true"></i> {{ annonce.zone.nom|capfirst }}
-                    {% if annonce.ville %} - {{ annonce.ville|capfirst }}{% endif %}
+                    <i class="fa fa-globe" aria-hidden="true"></i> {{ annonce.zone.nom|lower|capfirst }}
+                    {% if annonce.ville %} - {{ annonce.ville|lower|capfirst }}{% endif %}
                 </p>
                 <p><i class="fa fa-calendar-o" aria-hidden="true"></i> Publiée le {{ annonce.pub_date|date:'DATE_FORMAT' }}</p>
                 {% if annonce.multiple_files %}
