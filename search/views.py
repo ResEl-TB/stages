@@ -20,7 +20,7 @@ class IndexView(ListView, FormView):
         
         form = form_class(data={
             'zone': self.request.GET.get('zone', ''),
-            'duree': self.request.GET.get('duree', ''),
+            'duree': self.request.GET.getlist('duree', ''),
             'domain': self.request.GET.getlist('domain', ''),
             'type_de_contrat': self.request.GET.get('type_de_contrat', ''),
             'nom_entreprise': self.request.GET.get('nom_entreprise', ''),
