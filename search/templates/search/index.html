@@ -109,7 +109,12 @@
 <script>
     $('.clickable').on('click', function(event) {
         event.preventDefault();
-        window.location = $(this).data("url");
+
+        if (window.event.ctrlKey) {
+            window.location = $(this).data("url");
+        } else {
+            window.open($(this).data("url"));
+        };
     });
 </script>
 {% endblock %}
