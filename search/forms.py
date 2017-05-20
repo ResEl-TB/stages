@@ -41,7 +41,7 @@ class SearchForm(forms.Form):
             if value:
                 if key == 'nom_entreprise':
                     d[key+'__contains'] = value
-                elif key == 'domain':
+                elif key == 'domain' or key == 'duree':
                     d[key+'__pk__in'] = [_.pk for _ in value]
                 elif key == 'zone':
                     if 'toute' not in value.nom.lower():
