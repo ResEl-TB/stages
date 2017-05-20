@@ -58,7 +58,7 @@
         {% for annonce in object_list %}
         <div class="row element clickable" data-url="{% url 'search:detail' annonce.pk %}">
             <legend>
-                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|lower|capitalize }} - Durée de {{ annonce.duree.duree|lower }}
+                <b>{{ annonce.type_de_contrat.type_contrat|upper }}</b> - {{ annonce.nom_entreprise|lower|capfirst }} - Durée de {{ annonce.duree.duree|lower }}
             </legend>
             <div class="col-xs-6">
                 <p>
