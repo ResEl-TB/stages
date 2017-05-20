@@ -20,11 +20,11 @@ class SearchForm(forms.Form):
         required=False,
         widget=forms.SelectMultiple(attrs={'size': Domaine.objects.count()})
     )
-    duree = forms.ModelChoiceField(
+    duree = forms.ModelMultipleChoiceField(
         label=u'durée',
         queryset=Duree.objects.all(),
-        empty_label='',
-        required=False
+        required=False,
+        widget=forms.SelectMultiple(attrs={'size': Duree.objects.count()})
     )
     type_de_contrat = forms.ModelChoiceField(
         label=u'type du contrat',
