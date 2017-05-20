@@ -30,6 +30,10 @@
                     <table class="table">
                         <tbody>
                             <tr>
+                                <td><b>Date de publication</b></td>
+                                <td>{{ annonce.pub_date|date:'DATE_FORMAT' }}</td>
+                            </tr>
+                            <tr>
                                 <td><b>Organisme</b></td>
                                 <td>{{ annonce.nom_entreprise|lower|capfirst }}</td>
                             </tr>
