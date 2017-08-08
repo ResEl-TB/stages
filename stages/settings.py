@@ -135,33 +135,47 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(asctime)s [%(levelname)s] %(module)s %(process)d %(thread)d : %(message)s'
         },
         'simple': {
-            'format': '%(levelname)s %(message)s'
+            'format': '%(asctime)s [%(levelname)s] %(module)s : %(message)s'
         },
     },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(os.path.join(BASE_DIR, 'logs'), 'debug.log'),
+            'filename': '/srv/www/stages.resel.fr/logs/debug.log',
+            'formatter': 'simple',
+            'encoding': 'utf8',
         },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-        }
+            'formatter': 'verbose',
+            'include_html': True,
+        },
+        'logstash': {
+            'level': 'DEBUG',
+            'class': 'logstash.LogstashHandler',
+            'host': 'orion.adm.resel.fr',
+            'port': 5959,  # Default value: 5959
+            'version': 1,
+            'message_type': 'django',
+            'fqdn': False,  # Fully qualified domain name. Default value: false.
+            'tags': None,  # list of tags. Default: None.
+        },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file'],
+        'default': {
+            'handlers': ['file', 'logstash'],
+            'level': 'DEBUG',
             'propagate': True,
         },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
+        'django': {
+            'handlers': ['file', 'logstash'],
+            'level': 'DEBUG',
+            'propagate': True,
         },
-    }
+    },
 }
-
