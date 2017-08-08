@@ -13,3 +13,4 @@ python-cas==1.2.0
 pytz==2017.2
 requests==2.13.0
 six==1.10.0
+mysqlclient==1.3.10
