@@ -163,7 +163,7 @@ LOGGING = {
             'version': 1,
             'message_type': 'django',
             'fqdn': False,  # Fully qualified domain name. Default value: false.
-            'tags': None,  # list of tags. Default: None.
+            'tags': ['stages'],  # list of tags. Default: None.
         },
     },
     'loggers': {
