@@ -60,7 +60,7 @@
                     <li><a href="{% url 'post:creation' %}"><i class="fa fa-upload" aria-hidden="true"></i> Poster une annonce</a></li>
                     {% endif %}
                     <li><a href="{% url 'home' %}"><i class="fa fa-search" aria-hidden="true"></i> Parcourir les annonces</a></li>
-                    <li><a href="mailto:stages-admin@resel.fr?subject=[Contact] Demande d'informations"><i class="fa fa-info" aria-hidden="true"></i> Nous contacter</a></li>
+                    <li><a href="mailto:support@resel.fr?subject=[Stages] Demande de {{ request.user.username }}"><i class="fa fa-info" aria-hidden="true"></i> Nous contacter</a></li>
                 </ul>
             </div>
         </div>
