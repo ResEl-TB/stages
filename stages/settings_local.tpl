@@ -16,3 +16,8 @@ DEBUG = True
 
 # Google Maps API key
 EASY_MAPS_GOOGLE_MAPS_API_KEY = 'google_maps_key'
+
+# LDAP credentials
+LDAP_URL = "blah"
+LDAP_PORT = "389"
+LDAP_ADMIN_OU = "blah"
