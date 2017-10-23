@@ -6,10 +6,9 @@ from ldap3 import Server, Connection
 class ReselAdminMiddleware(object):
     def __init__(self, get_response):
         self.get_response = get_response
-        # One-time configuration and initialization.
 
     def __call__(self, request):
-        if request.user.is_authenticated() and not request.user.is_superuser():
+        if request.user.is_authenticated and not request.user.is_superuser:
             ldap = Connection(
                 Server(host=settings.LDAP_URL, port=int(settings.LDAP_PORT)),
                 auto_bind=True
