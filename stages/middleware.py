@@ -13,8 +13,8 @@ class ReselAdminMiddleware(object):
                 Server(host=settings.LDAP_URL, port=int(settings.LDAP_PORT)),
                 auto_bind=True
             )
-            if ldap.search(settings.LDAP_ADMIN_OU, "(&(uid={}))".format(request.user.uid)):
-                user = User.objects.get(uid=request.user.uid)
+            if ldap.search(settings.LDAP_ADMIN_OU, "(&(uid={}))".format(request.user.username)):
+                user = User.objects.get(username=request.user.username)
                 user.is_admin = True
                 user.is_staff = True
                 user.is_superuser = True
