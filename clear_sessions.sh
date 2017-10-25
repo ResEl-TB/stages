@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 cd /srv/www/stages.resel.fr
-echo '>>> Cleaning Django sessions\n'
+echo '>>> Cleaning Django sessions'
 /srv/www/stages.resel.fr/env/bin/python manage.py clearsessions
-echo '[executed]\n'
+echo '[executed]'
 
-echo '\n>>> Cleaning django-cas-ng sessions\n'
+echo ''
+echo '>>> Cleaning django-cas-ng sessions'
 /srv/www/stages.resel.fr/env/bin/python manage.py django_cas_ng_clean_sessions
 echo '[executed]'
