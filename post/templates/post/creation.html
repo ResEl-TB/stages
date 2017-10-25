@@ -16,23 +16,23 @@
             <fieldset class="col-md-4">
                 <legend class="text-center">Information nécessaires</legend>
                 <div class="form-group">
-                    <label for="{{ form.zone.label_for }}">{{ form.zone.label|capfirst }}</label>
+                    <label for="{{ form.zone.id_for_label }}">{{ form.zone.label|capfirst }}</label>
                     {{ form.zone|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.nom_entreprise.label_for }}">{{ form.nom_entreprise.label|capfirst }}</label>
+                    <label for="{{ form.nom_entreprise.id_for_label }}">{{ form.nom_entreprise.label|capfirst }}</label>
                     {{ form.nom_entreprise|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.type_de_contrat.label_for }}">{{ form.type_de_contrat.label|capfirst }}</label>
+                    <label for="{{ form.type_de_contrat.id_for_label }}">{{ form.type_de_contrat.label|capfirst }}</label>
                     {{ form.type_de_contrat|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.duree.label_for }}">{{ form.duree.label|capfirst }}</label>
+                    <label for="{{ form.duree.id_for_label }}">{{ form.duree.label|capfirst }}</label>
                     {{ form.duree|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.domain.label_for }}">{{ form.domain.label|capfirst }}</label>
+                    <label for="{{ form.domain.id_for_label }}">{{ form.domain.label|capfirst }}</label>
                     {{ form.domain|addcss:"form-control" }}
                     <p class="help-block">{{ form.domain.help_text }}</p>
                 </div>
@@ -41,11 +41,11 @@
             <fieldset class="col-md-4">
                 <legend class="text-center">Accès à l'annonce</legend>
                 <div class="form-group">
-                    <label for="{{ form.url.label_for }}">{{ form.url.label|capfirst }}</label>
+                    <label for="{{ form.url.id_for_label }}">{{ form.url.label|capfirst }}</label>
                     {{ form.url|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.file.label_for }}">{{ form.file.label|capfirst }}</label>
+                    <label for="{{ form.file.id_for_label }}">{{ form.file.label|capfirst }}</label>
                     {{ form.file }}
                 </div>
                 <div class="checkbox">
@@ -56,19 +56,19 @@
             <fieldset class="col-md-4">
                 <legend class="text-center">Informations facultatives</legend>
                 <div class="form-group">
-                    <label for="{{ form.ville.label_for }}">{{ form.ville.label|capfirst }}</label>
+                    <label for="{{ form.ville.id_for_label }}">{{ form.ville.label|capfirst }}</label>
                     {{ form.ville|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.date_debut.label_for }}">{{ form.date_debut.label|capfirst }}</label>
+                    <label for="{{ form.date_debut.id_for_label }}">{{ form.date_debut.label|capfirst }}</label>
                     {{ form.date_debut|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.type_organisme.label_for }}">{{ form.type_organisme.label|capfirst }}</label>
+                    <label for="{{ form.type_organisme.id_for_label }}">{{ form.type_organisme.label|capfirst }}</label>
                     {{ form.type_organisme|addcss:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label>{{ form.commentaires.label|capfirst }}</label>
+                    <label for="{{ form.commentaires.id_for_label }}">{{ form.commentaires.label|capfirst }}</label>
                     {{ form.commentaires|addcss:"form-control" }}
                 </div>
             </fieldset>
