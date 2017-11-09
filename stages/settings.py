@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Config pour Django-cas-ng
 CAS_SERVER_URL = "https://login.telecom-bretagne.eu/cas/"
-CAS_CREATE_USER = False
+CAS_CREATE_USER = True
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
