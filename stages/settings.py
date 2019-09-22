@@ -32,7 +32,7 @@ AUTHENTICATION_BACKENDS = (
 # Config pour l'envoi de mails
 SERVER_EMAIL = 'stages-bot@resel.fr'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'pegase.adm.resel.fr'
+EMAIL_HOST = 'toad'
 EMAIL_SUBJECT_PREFIX = ''
 
 ADMINS = [
